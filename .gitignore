@@ -1,0 +1,11 @@
+# 文件以及目录过滤
+# 过滤library目录
+CollisionDetectionStudy/Library/
+# 过滤.vs目录
+CollisionDetectionStudy/.vs/
+# 过滤Temp目录
+CollisionDetectionStudy/Temp/
+# 过滤obj目录
+CollisionDetectionStudy/obj/
+# 过滤Log目录
+CollisionDetectionStudy/Log/
