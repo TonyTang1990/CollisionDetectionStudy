@@ -22,31 +22,31 @@ AABB与AABB:
 
 圆与AABB:
 
-![Circle2DIntersectionWithAABB](/images/Circle2DIntersectionWithAABB.PNG)
+![Circle2DIntersectionWithAABB](./images/Circle2DIntersectionWithAABB.PNG)
 
 圆与椭圆形:
 
-![Circle2DIntersectionWithCapsule2D](/images/Circle2DIntersectionWithCapsule2D.PNG)
+![Circle2DIntersectionWithCapsule2D](./images/Circle2DIntersectionWithCapsule2D.PNG)
 
 圆与OBB:
 
-![Circle2DIntersectionWithOBB2D](/images/Circle2DIntersectionWithOBB2D.PNG)
+![Circle2DIntersectionWithOBB2D](./images/Circle2DIntersectionWithOBB2D.PNG)
 
 圆与旋转椭圆形:
 
-![Circle2DIntersectionWithRotateCapsule2D](/images/Circle2DIntersectionWithRotateCapsule2D.PNG)
+![Circle2DIntersectionWithRotateCapsule2D](./images/Circle2DIntersectionWithRotateCapsule2D.PNG)
 
 圆与扇形:
 
-![Circle2DIntersectionWithSector2D](/images/Circle2DIntersectionWithSector2D.PNG)
+![Circle2DIntersectionWithSector2D](./images/Circle2DIntersectionWithSector2D.PNG)
 
 点与凸多边形:
 
-![PointInPolygon](/images/PointInPolygon.PNG)
+![PointInPolygon](./images/PointInPolygon.PNG)
 
 点与凸多边形:
 
-![PointIntersectionWithAABB2D](/images/PointIntersectionWithAABB2D.PNG)
+![PointIntersectionWithAABB2D](./images/PointIntersectionWithAABB2D.PNG)
 
 
 ## 博客
