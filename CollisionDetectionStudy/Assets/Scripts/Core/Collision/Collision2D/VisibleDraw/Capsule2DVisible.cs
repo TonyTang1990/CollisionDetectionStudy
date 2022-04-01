@@ -102,21 +102,45 @@ namespace TH.Module.Collision2D
             // 分两部分绘制
             // 1. 胶囊体中心部分(4个顶点)
             // 2. 胶囊体两头部分(各25个顶点)
+            var goForward = transform.forward;
+            // 点乘计算旋转了多少度
+            var pointLineVector3 = new Vector3(Capsule2D.PointLine.x, 0, Capsule2D.PointLine.y);
+            var vectorDot = Vector3.Dot(goForward, pointLineVector3);
+            var radians = Mathf.Acos(vectorDot / (goForward.magnitude * pointLineVector3.magnitude));
+            var angle = Mathf.Rad2Deg * radians;
+            // 叉乘计算旋转方向(即轴)
+            var rotateAxis = Vector3.Cross(goForward, pointLineVector3);            
             Vector3 forward = new Vector3(Capsule2D.PointLine.x, 0, Capsule2D.PointLine.y).normalized;
+            var lineLength = Capsule2D.PointLine.magnitude;
             var center = Capsule2D.StartPoint;
-            var halfextents = new Vector2(Capsule2D.Radius, Capsule2D.PointLine.magnitude / 2);
-            mCenterMeshVerticesList[0] = new Vector3(center.x - halfextents.x, 0, center.y - halfextents.y);
-            mCenterMeshVerticesList[1] = new Vector3(center.x - halfextents.x, 0, center.y + halfextents.y);
-            mCenterMeshVerticesList[2] = new Vector3(center.x + halfextents.x, 0, center.y + halfextents.y);
-            mCenterMeshVerticesList[3] = new Vector3(center.x + halfextents.x, 0, center.y - halfextents.y);
+            center = center + Capsule2D.PointLine / 2;
+            var halfextents = new Vector2(Capsule2D.Radius, lineLength / 2);
+            // 旋转椭圆中间Size
+            // 先旋转后平移
+            mCenterMeshVerticesList[0] = new Vector3(-halfextents.x, 0, -halfextents.y);
+            mCenterMeshVerticesList[1] = new Vector3(-halfextents.x, 0, halfextents.y);
+            mCenterMeshVerticesList[2] = new Vector3(halfextents.x, 0,halfextents.y);
+            mCenterMeshVerticesList[3] = new Vector3(halfextents.x, 0, -halfextents.y);
+            for(int i = 0, length = mCenterMeshVerticesList.Count; i < length; i++)
+            {
+                mCenterMeshVerticesList[i] = Quaternion.AngleAxis(angle, rotateAxis) * mCenterMeshVerticesList[i];
+            }
+            var offset = new Vector3(center.x, 0, center.y);
+            mCenterMeshVerticesList[0] += offset;
+            mCenterMeshVerticesList[1] += offset;
+            mCenterMeshVerticesList[2] += offset;
+            mCenterMeshVerticesList[3] += offset;
             mCenterDrawMesh.SetVertices(mCenterMeshVerticesList);
             mCenterDrawMesh.RecalculateNormals();
 
             if (VerticesCount > 0)
             {
                 var right = Quaternion.Euler(0, 90, 0) * forward;
-                var tophalfcirclecenter = new Vector3(center.x, 0, center.y + halfextents.y);
-                var bottlehalfcirclecenter = new Vector3(center.x, 0, center.y - halfextents.y);
+                // 先旋转后平移
+                var tophalfcirclecenter = Quaternion.AngleAxis(angle, rotateAxis) * new Vector3(0, 0, halfextents.y);
+                var bottlehalfcirclecenter = Quaternion.AngleAxis(angle, rotateAxis) * new Vector3(0, 0, -halfextents.y);
+                tophalfcirclecenter += offset;
+                bottlehalfcirclecenter += offset;
                 float eachangle = 180f / (VerticesCount - 2);
                 mTopCircleMeshVerticesList[0] = tophalfcirclecenter;
                 for (int i = 1, length = VerticesCount; i < length; i++)

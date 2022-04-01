@@ -13,9 +13,9 @@ using UnityEngine.UI;
 /// <summary>
 /// 启动脚本
 /// </summary>
+[ExecuteInEditMode]
 public class GameLauncher : MonoBehaviour
 {
-
     [Header("圆形绘制对象脚本1")]
     public Circle2DVisible Circle2DVisible1;
 
@@ -73,9 +73,50 @@ public class GameLauncher : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update() {
+    void Update()
+    {
+        UpdatePosition();
+        CheckCollisionDetection();
+    }
+
+    /// <summary>
+    /// 更新坐标
+    /// </summary>
+    private void UpdatePosition()
+    {
+        Circle2DVisible1.Circle2D.Center.x = Circle2DVisible1.transform.position.x;
+        Circle2DVisible1.Circle2D.Center.y = Circle2DVisible1.transform.position.z;
+
+        Circle2DVisible2.Circle2D.Center.x = Circle2DVisible2.transform.position.x;
+        Circle2DVisible2.Circle2D.Center.y = Circle2DVisible2.transform.position.z;
+
+        AABB2DVisible.AABB2D.Center.x = AABB2DVisible.transform.position.x;
+        AABB2DVisible.AABB2D.Center.y = AABB2DVisible.transform.position.z;
+
+        AABB2DVisible2.AABB2D.Center.x = AABB2DVisible2.transform.position.x;
+        AABB2DVisible2.AABB2D.Center.y = AABB2DVisible2.transform.position.z;
+
+        OBB2DVisible.OBB2D.Center.x = OBB2DVisible.transform.position.x;
+        OBB2DVisible.OBB2D.Center.y = OBB2DVisible.transform.position.z;
+
+        Capsule2DVisible.Capsule2D.StartPoint.x = Capsule2DVisible.transform.position.x - Capsule2DVisible.Capsule2D.PointLine.x / 2;
+        Capsule2DVisible.Capsule2D.StartPoint.y = Capsule2DVisible.transform.position.z - Capsule2DVisible.Capsule2D.PointLine.y / 2;
+
+        Sector2DVisible.Sector2D.StartPoint.x = Sector2DVisible.transform.position.x;
+        Sector2DVisible.Sector2D.StartPoint.y = Sector2DVisible.transform.position.z;
+
+        Sphere3DVisible1.Sphere3D.Center = Sphere3DVisible1.transform.position;
+
+        Sphere3DVisible2.Sphere3D.Center = Sphere3DVisible2.transform.position;
+    }
+
+    /// <summary>
+    /// 检查相交检测
+    /// </summary>
+    private void CheckCollisionDetection()
+    {
         var outputtext = string.Empty;
-        if ((Circle2DVisible1 != null && Circle2DPoint != null) && 
+        if ((Circle2DVisible1 != null && Circle2DPoint != null) &&
             Collision2DUtilities.CircleAndPointIntersection(Circle2DVisible1.Circle2D, new Vector2(Circle2DPoint.position.x, Circle2DPoint.position.z)))
         {
             outputtext += $"{Circle2DVisible1.name}和{Circle2DPoint.name}相交!\n";
@@ -85,22 +126,22 @@ public class GameLauncher : MonoBehaviour
         {
             outputtext += $"{AABB2DVisible.name}和{Circle2DPoint.name}相交!\n";
         }
-        if ((Circle2DVisible1 != null && Circle2DVisible2 != null) && 
+        if ((Circle2DVisible1 != null && Circle2DVisible2 != null) &&
             Collision2DUtilities.CircleAndCircleIntersection(Circle2DVisible1.Circle2D, Circle2DVisible2.Circle2D))
         {
             outputtext += $"{Circle2DVisible1.name}和{Circle2DVisible2.name}相交!\n";
         }
-        if ((Circle2DVisible1 != null && Capsule2DVisible != null) && 
+        if ((Circle2DVisible1 != null && Capsule2DVisible != null) &&
             Collision2DUtilities.CircleAndCapsuleIntersection(Circle2DVisible1.Circle2D, Capsule2DVisible.Capsule2D))
         {
             outputtext += $"{Circle2DVisible1.name}和{Capsule2DVisible.name}相交!\n";
         }
-        if ((Circle2DVisible1 != null && Sector2DVisible != null) && 
+        if ((Circle2DVisible1 != null && Sector2DVisible != null) &&
             Collision2DUtilities.CircleAndSectorIntersection(Circle2DVisible1.Circle2D, Sector2DVisible.Sector2D))
         {
             outputtext += $"{Circle2DVisible1.name}和{Sector2DVisible.name}相交!\n";
         }
-        if ((Circle2DVisible1 != null && AABB2DVisible != null) && 
+        if ((Circle2DVisible1 != null && AABB2DVisible != null) &&
             Collision2DUtilities.CircleAndAABBIntersection(Circle2DVisible1.Circle2D, AABB2DVisible.AABB2D))
         {
             outputtext += $"{Circle2DVisible1.name}和{AABB2DVisible.name}相交!\n";
@@ -135,12 +176,12 @@ public class GameLauncher : MonoBehaviour
         {
             outputtext += $"{Polygon2DVisible3.name}和{Circle2DPoint.name}相交!\n";
         }
-        if ((Sphere3DVisible1 != null && Circle3DPoint != null) && 
+        if ((Sphere3DVisible1 != null && Circle3DPoint != null) &&
             Collision3DUtilities.SphereAndPointIntersection3D(Sphere3DVisible1.Sphere3D, Circle3DPoint.position))
         {
             outputtext += $"{Sphere3DVisible1.name}和{Circle3DPoint.name}相交!\n";
         }
-        if ((Sphere3DVisible1 != null && Sphere3DVisible2 != null) && 
+        if ((Sphere3DVisible1 != null && Sphere3DVisible2 != null) &&
             Collision3DUtilities.SphereAndSphereIntersection3D(Sphere3DVisible1.Sphere3D, Sphere3DVisible2.Sphere3D))
         {
             outputtext += $"{Sphere3DVisible1.name}和{Sphere3DVisible2.name}相交!\n";

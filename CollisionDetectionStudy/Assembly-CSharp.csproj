@@ -60,17 +60,11 @@
     <Compile Include="Assets\Scripts\Core\Collision\Collision2D\OBB2D.cs" />
     <Compile Include="Assets\Scripts\Core\Collision\Collision2D\Polygon2D.cs" />
     <Compile Include="Assets\Scripts\Core\Collision\Collision2D\Sector2D.cs" />
-    <Compile Include="Assets\Scripts\Core\Collision\Collision2D\VisibleDraw\AABB2DDraw.cs" />
     <Compile Include="Assets\Scripts\Core\Collision\Collision2D\VisibleDraw\AABB2DVisible.cs" />
-    <Compile Include="Assets\Scripts\Core\Collision\Collision2D\VisibleDraw\Capsule2DDraw.cs" />
     <Compile Include="Assets\Scripts\Core\Collision\Collision2D\VisibleDraw\Capsule2DVisible.cs" />
-    <Compile Include="Assets\Scripts\Core\Collision\Collision2D\VisibleDraw\Circle2DDraw.cs" />
     <Compile Include="Assets\Scripts\Core\Collision\Collision2D\VisibleDraw\Circle2DVisible.cs" />
-    <Compile Include="Assets\Scripts\Core\Collision\Collision2D\VisibleDraw\OBB2DDraw.cs" />
     <Compile Include="Assets\Scripts\Core\Collision\Collision2D\VisibleDraw\OBB2DVisible.cs" />
-    <Compile Include="Assets\Scripts\Core\Collision\Collision2D\VisibleDraw\Polygon2DDraw.cs" />
     <Compile Include="Assets\Scripts\Core\Collision\Collision2D\VisibleDraw\Polygon2DVisible.cs" />
-    <Compile Include="Assets\Scripts\Core\Collision\Collision2D\VisibleDraw\Sector2DDraw.cs" />
     <Compile Include="Assets\Scripts\Core\Collision\Collision2D\VisibleDraw\Sector2DVisible.cs" />
     <Compile Include="Assets\Scripts\Core\Collision\Collision3D\Collision3DUtilities.cs" />
     <Compile Include="Assets\Scripts\Core\Collision\Collision3D\Sphere3D.cs" />
