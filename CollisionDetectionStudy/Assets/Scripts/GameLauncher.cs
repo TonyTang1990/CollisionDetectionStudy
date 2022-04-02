@@ -61,6 +61,21 @@ public class GameLauncher : MonoBehaviour
     [Header("可视化原点对象")]
     public Transform VisiblePoint;
 
+    [Header("线段点A")]
+    public Transform LinePointA;
+
+    [Header("线段点B")]
+    public Transform LinePointB;
+
+    [Header("线段点C")]
+    public Transform LinePointC;
+
+    [Header("线段点D")]
+    public Transform LinePointD;
+
+    [Header("线段交点")]
+    public Transform LineIntersectionPoint;
+
     /// <summary>
     /// 输出文本
     /// </summary>
@@ -77,6 +92,7 @@ public class GameLauncher : MonoBehaviour
     {
         UpdatePosition();
         CheckCollisionDetection();
+        CaculateLineIntersection();
     }
 
     /// <summary>
@@ -191,5 +207,37 @@ public class GameLauncher : MonoBehaviour
             outputtext = $"无任何对象相交!";
         }
         OutPutText.text = outputtext;
+    }
+
+    /// <summary>
+    /// 计算线段相交点
+    /// </summary>
+    private void CaculateLineIntersection()
+    {
+        if(LinePointA != null && LinePointB != null && LinePointC != null
+            && LinePointD != null && LineIntersectionPoint != null)
+        {
+
+        }
+    }
+
+    void OnDrawGizmos()
+    {
+        if (LinePointA != null && LinePointB != null && LinePointC != null
+            && LinePointD != null && LineIntersectionPoint != null)
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawLine(LinePointA.position, LinePointB.position);
+            Gizmos.color = Color.green;
+            Gizmos.DrawLine(LinePointC.position, LinePointD.position);
+            // 暂时当做2D线段来算
+            Vector2 a = new Vector2(LinePointA.position.x, LinePointA.position.z);
+            Vector2 b = new Vector2(LinePointB.position.x, LinePointB.position.z);
+            Vector2 c = new Vector2(LinePointC.position.x, LinePointC.position.z);
+            Vector2 d = new Vector2(LinePointD.position.x, LinePointD.position.z);
+            Vector2 intersectionPoint;
+            Vector2Utilities.GetIntersectPoint(a, b, c, d, out intersectionPoint);
+            LineIntersectionPoint.position = new Vector3(intersectionPoint.x, 0, intersectionPoint.y);
+        }
     }
 }
