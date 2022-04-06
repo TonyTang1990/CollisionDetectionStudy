@@ -56,7 +56,7 @@ public static class Vector3Utilities
         // 判定ab是否在cd两侧
         // 以ab为基准，如果ac和ad叉乘结果再点乘>0则表示c和d在ab同一侧
         // 3D向量叉乘是向量，通过计算两个叉乘向量的点乘判定是否同方向从而判定是否在一侧
-        if (Vector3.Dot(Vector3.Cross(ab, ac), Vector3.Cross(ab, ad)) <= 0)
+        if (Vector3.Dot(Vector3.Cross(ab, ac), Vector3.Cross(ab, ad)) >= 0)
         {
             return false;
         }
@@ -64,7 +64,7 @@ public static class Vector3Utilities
         var ca = a - c;
         var cb = b - c;
         var cd = d - c;
-        if (Vector3.Dot(Vector3.Cross(cd, ca), Vector3.Cross(cd, cb)) <= 0)
+        if (Vector3.Dot(Vector3.Cross(cd, ca), Vector3.Cross(cd, cb)) >= 0)
         {
             return false;
         }

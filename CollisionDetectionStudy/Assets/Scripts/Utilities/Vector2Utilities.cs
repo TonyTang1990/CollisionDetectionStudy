@@ -41,8 +41,9 @@ public static class Vector2Utilities
         var ad = d - a;
         // 叉乘判定两个向量的方向
         // 判定ab是否在cd两侧
-        // 以ab为基准，如果ac和ad叉乘结果相乘>0则表示c和d在ab同一侧
-        if (Vector2Utilities.Cross(ab, ac) * Vector2Utilities.Cross(ab, ad) <= 0)
+        // 以ab为基准，如果ab叉乘ac或ad大于0表示逆时针反之顺时针,0表示两者方向相同
+        // 那么c和d要在ab同一侧，则ab叉乘ac的结果和ab叉乘ad的结果相乘需要>0
+        if (Vector2Utilities.Cross(ab, ac) * Vector2Utilities.Cross(ab, ad) >= 0)
         {
             return false;
         }
@@ -50,7 +51,7 @@ public static class Vector2Utilities
         var ca = a - c;
         var cb = b - c;
         var cd = d - c;
-        if (Vector2Utilities.Cross(cd, ca) * Vector2Utilities.Cross(cd, cb) <= 0)
+        if (Vector2Utilities.Cross(cd, ca) * Vector2Utilities.Cross(cd, cb) >= 0)
         {
             return false;
         }
@@ -76,12 +77,12 @@ public static class Vector2Utilities
             return false;
         }
         // 根据推到结论
-        // AO / AB = Cross(CD, CA) / Cross(CD, AB)
-        // O = A + Cross(CD, CA) / Cross(CD, AB) * AB
+        // AO / AB = Cross(CA, CD) / Cross(CD, AB)
+        // O = A + Cross(CA, CD) / Cross(CD, AB) * AB
         var ab = b - a;
         var ca = a - c;
         var cd = d - c;
-        Vector3 v1 = Vector3.Cross(cd, ca);
+        Vector3 v1 = Vector3.Cross(ca, cd);
         Vector3 v2 = Vector3.Cross(cd, ab);
         float ratio = Vector3.Dot(v1, v2) / v2.sqrMagnitude;
         intersectPos = a + ab * ratio;
