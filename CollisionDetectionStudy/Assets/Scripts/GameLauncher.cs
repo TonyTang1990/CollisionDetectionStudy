@@ -76,6 +76,21 @@ public class GameLauncher : MonoBehaviour
     [Header("线段交点")]
     public Transform LineIntersectionPoint;
 
+    [Header("线段点E")]
+    public Transform LinePointE;
+
+    [Header("线段点F")]
+    public Transform LinePointF;
+
+    [Header("线段点G")]
+    public Transform LinePointG;
+
+    [Header("线段点H")]
+    public Transform LinePointH;
+
+    [Header("线段交点2")]
+    public Transform LineIntersectionPoint2;
+
     /// <summary>
     /// 输出文本
     /// </summary>
@@ -92,7 +107,6 @@ public class GameLauncher : MonoBehaviour
     {
         UpdatePosition();
         CheckCollisionDetection();
-        CaculateLineIntersection();
     }
 
     /// <summary>
@@ -209,18 +223,6 @@ public class GameLauncher : MonoBehaviour
         OutPutText.text = outputtext;
     }
 
-    /// <summary>
-    /// 计算线段相交点
-    /// </summary>
-    private void CaculateLineIntersection()
-    {
-        if(LinePointA != null && LinePointB != null && LinePointC != null
-            && LinePointD != null && LineIntersectionPoint != null)
-        {
-
-        }
-    }
-
     void OnDrawGizmos()
     {
         if (LinePointA != null && LinePointB != null && LinePointC != null
@@ -230,7 +232,7 @@ public class GameLauncher : MonoBehaviour
             Gizmos.DrawLine(LinePointA.position, LinePointB.position);
             Gizmos.color = Color.green;
             Gizmos.DrawLine(LinePointC.position, LinePointD.position);
-            // 暂时当做2D线段来算
+            // 当做2D线段来算
             Vector2 a = new Vector2(LinePointA.position.x, LinePointA.position.z);
             Vector2 b = new Vector2(LinePointB.position.x, LinePointB.position.z);
             Vector2 c = new Vector2(LinePointC.position.x, LinePointC.position.z);
@@ -238,6 +240,23 @@ public class GameLauncher : MonoBehaviour
             Vector2 intersectionPoint;
             Vector2Utilities.GetIntersectPoint(a, b, c, d, out intersectionPoint);
             LineIntersectionPoint.position = new Vector3(intersectionPoint.x, 0, intersectionPoint.y);
+        }
+
+        if (LinePointE != null && LinePointF != null && LinePointG != null
+            && LinePointH != null && LineIntersectionPoint2 != null)
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawLine(LinePointE.position, LinePointF.position);
+            Gizmos.color = Color.green;
+            Gizmos.DrawLine(LinePointG.position, LinePointH.position);
+            // 当做2D线段来算
+            Vector2 a = new Vector2(LinePointE.position.x, LinePointE.position.z);
+            Vector2 b = new Vector2(LinePointF.position.x, LinePointF.position.z);
+            Vector2 c = new Vector2(LinePointG.position.x, LinePointG.position.z);
+            Vector2 d = new Vector2(LinePointH.position.x, LinePointH.position.z);
+            Vector2 intersectionPoint;
+            Vector2Utilities.GetLineIntersectPoint(a, b, c, d, out intersectionPoint);
+            LineIntersectionPoint2.position = new Vector3(intersectionPoint.x, 0, intersectionPoint.y);
         }
     }
 }
